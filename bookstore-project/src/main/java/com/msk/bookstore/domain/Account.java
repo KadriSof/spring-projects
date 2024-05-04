@@ -48,6 +48,7 @@ public class Account {
 
     @NotBlank(message = "Address must not be empty")
     @Size(max = 255, message = "Address length must not exceed 255 characters")
-    private String address;
+    @Embedded
+    private Address address;
 
 }

@@ -21,13 +21,16 @@ public class Book {
     @NotBlank(message = "Book title must not be empty.")
     private String title;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id", nullable = false)
     @NotBlank(message = "Book author must not be empty.")
-    private String author;
+    private Author author;
 
-    @NotBlank(message = "Book ISBN must not be empty.")
     @NaturalId
+    @NotBlank(message = "Book ISBN must not be empty.")
     private String isbn;
-    private String publisher;
+
+    @NotBlank(message = "Number of pages must not be blank.")
     private int pages;
 
     @ManyToMany
@@ -37,6 +40,8 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private Set<Genre> genres = new HashSet<>();
+
+    private String publisher;
 
     public void addGenre(Genre genre) {
         this.genres.add(genre);
